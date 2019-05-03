@@ -1,5 +1,5 @@
 require "test/unit"
-require_relative "../lib/more-ruby"
+require_relative "../lib/more_ruby"
 
 class TestString < Test::Unit::TestCase
 

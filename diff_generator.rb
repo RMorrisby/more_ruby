@@ -1,4 +1,4 @@
-# Script to help produce summary documentation for more-ruby
+# Script to help produce summary documentation for more_ruby
 
 def diff_out(a1, a2)
 	":" + (a1 - a2).join(", :")
@@ -13,7 +13,7 @@ true1 = TrueClass.instance_methods.sort
 false1 = FalseClass.instance_methods.sort
 nil1 = NilClass.instance_methods.sort
 
-require_relative 'lib/more-ruby.rb'
+require_relative 'lib/more_ruby.rb'
 
 s2 = String.instance_methods.sort
 a2 = Array.instance_methods.sort

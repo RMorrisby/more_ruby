@@ -1,6 +1,6 @@
 A very simple gem that adds some methods to some Ruby standard classes, e.g. <array>.include_any?, <array>.delete_random, etc.
 
-Simply require the gem ( require "more-ruby" ) and the additional methods will be available.
+Simply require the gem ( require "more_ruby" ) and the additional methods will be available.
 
 ## New instance methods ##
 

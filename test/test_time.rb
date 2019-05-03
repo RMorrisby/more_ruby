@@ -1,6 +1,6 @@
 require "test/unit"
 require "test/unit"
-require_relative "../lib/more-ruby"
+require_relative "../lib/more_ruby"
 
 class TestArray < Test::Unit::TestCase
 
