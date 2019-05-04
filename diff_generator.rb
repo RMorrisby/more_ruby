@@ -24,19 +24,19 @@ classes.each do |z|
 	out[z.to_s][:after_singleton] = z.singleton_methods.sort
 end
 
-puts "## New instance methods ##\n"
+puts "# New instance methods #\n"
 
 classes.each do |z|
 	diff = diff_out(out[z.to_s][:after_instance], out[z.to_s][:before_instance])	
-	puts "\n# #{z.to_s}\n" + diff unless diff.empty?
+	puts "\n## #{z.to_s}\n" + diff unless diff.empty?
 end
 
 puts ""
-puts "## New singleton methods ##\n"
+puts "# New singleton methods #\n"
 
 classes.each do |z|
 	diff = diff_out(out[z.to_s][:after_singleton], out[z.to_s][:before_singleton])	
-	puts "\n# #{z.to_s}\n" + diff unless diff.empty?
+	puts "\n## #{z.to_s}\n" + diff unless diff.empty?
 end
 
 exit
