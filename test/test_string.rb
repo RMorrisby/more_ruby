@@ -38,7 +38,7 @@ class TestString < Test::Unit::TestCase
 		assert_nil(re =~ e, ".escape yielded an escaped string that matched its Regexp object")
 	end
 
-	def test_underbarize
+	def test_snakecase
 		a = []
 		a << {:raw => "thiNGS", :expected => "thiNGS"}
 		a << {:raw => "thiNGS-with_stuff", :expected => "thiNGS_with_stuff"}
@@ -46,13 +46,13 @@ class TestString < Test::Unit::TestCase
 		a << {:raw => "th2i<>n!!!gs", :expected => "th2i_n_gs"}
 
 		a.each do |x|
-			actual = x[:raw].underbarize
-			assert_equal(actual, x[:expected], ".underbarize didn't work properly")
+			actual = x[:raw].snakecase
+			assert_equal(actual, x[:expected], ".snakecase didn't work properly")
 		end
 
 	end
 
-	def test_underbarize_and_downcase
+	def test_snakecase_and_downcase
 		a = []
 		a << {:raw => "thiNGS", :expected => "things"}
 		a << {:raw => "thiNGS-with_stuff", :expected => "things_with_stuff"}
@@ -60,8 +60,8 @@ class TestString < Test::Unit::TestCase
 		a << {:raw => "th2i<>n!!!gs", :expected => "th2i_n_gs"}
 
 		a.each do |x|
-			actual = x[:raw].underbarize_and_downcase
-			assert_equal(actual, x[:expected], ".underbarize_and_downcase didn't work properly")
+			actual = x[:raw].snakecase_and_downcase
+			assert_equal(actual, x[:expected], "snakecase_and_downcase didn't work properly")
 		end
 
 	end
