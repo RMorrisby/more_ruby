@@ -59,12 +59,11 @@ class String
         self.size - reverse_index - 1
     end
 
-    def snakecase
+    # Changes every sequence of non-alpha-numeric characters to underscores
+    # If you want to convert something looking like camelcase to snakecase, 
+    # use snakecase
+    def snakecase_non_alpha
         gsub(/[^a-zA-Z0-9]+/, '_')
-    end
-
-    def snakecase_and_downcase
-        downcase.snakecase
     end
 
     # Like camelcase but with the first letter also capitalised
@@ -79,27 +78,103 @@ class String
     end
 
     # Converts aStringInCamelCase to a_string_in_camel_case
-    def camelcase_to_snakecase
+    # Also converts SomeStringInPascalCase to some_string_in_pascal_case
+    #a << {:raw => "thiNGS-with_stuff", :expected => "thi_ngs_with_stuff"}
+    def snakecase
+        # Notes : 
+        # If the entire string contains only uppercase (with or without underscores), return it as it is
+        if self =~ /^[A-Z_]+$/
+            return self
+        end
+
+        # If the entire string contains only uppercase and numbers, AND has underscores, return it as it is
+        # REQ_ID2 -> REQ_ID2 ; REQID2 should not -> REQID2
+        if self =~ /^[A-Z0-9_]+$/ && self.include?("_")
+            return self
+        end
+
         a = []
 
-        self =~ /(^[a-z]+)/
-        a << $1 if $1
+        before = self.snakecase_non_alpha
+        parts = before.split("_")
+        
+        # Process each part, then stitch them back together
+        # Each part might itself contain several 'camel humps' 
+        # Each fragment within each part might be of different 'format'
 
-        m = self.scan /([A-Z]+[a-z0-9]*)/
-        m.flatten!
-        m.each do |fragment|
-            fragment =~ /([A-Z]+[a-z0-9]*)/
-            caps = $1
-            lower = $2
-            if caps.size > 1
-                s = "_#{caps.downcase}"
-                a << s
-                caps = "" # set to empty string so that the below caps.downcase still works
+        parts.each do |part|
+            # If the part is already all lowercase, keep it and move on to the next part
+            part =~ /^([a-z0-9]+)$/
+            if $1
+                a << $1
+                next
             end
-            s = "_#{caps.downcase}#{lower}"
-            a << s unless s == "_"
-        end
-        a.join
+            
+            # ABC -> ABC # if all capitals, leave it as it is
+            # If the part is already all uppercase, keep it and move on to the next part
+            part =~ /^([A-Z]+)$/
+            if $1
+                a << $1
+                next
+            end
+
+            #
+            # The part contains 'camel humps', which need to be processed
+            #
+
+            # Make sure to preserve the leading part of the string before the first 'hump'
+            part =~ /^([a-z0-9]+)([A-Z])/
+            if $1
+                a << $1
+            end
+
+            # This scan-regex will only match from the first 'hump' onwards
+            fragments = part.scan /([A-Z]+[a-z0-9]*)/
+            fragments.flatten!
+            fragments.each do |fragment|
+
+                # ABCD -> abcd
+                fragment =~ /^([A-Z]+)$/
+                if $1
+                    a << $1.downcase
+                    next
+                end
+
+                # ABCD1234 -> abcd_1234
+                fragment =~ /^([A-Z]+)([0-9]+)$/
+                if $1
+                    a << $1.downcase
+                    a << $2
+                    next
+                end
+                
+                # Abc -> abc
+                fragment =~ /^([A-Z][a-z0-9]*)$/
+                if $1
+                    a << $1.downcase
+                    next
+                end
+                
+                # ABCDef -> abc_def
+                fragment =~ /^([A-Z]+)([A-Z][a-z0-9]*)$/
+                if $1
+                    a << $1.downcase
+                    a << $2.downcase
+                    next
+                end
+
+            end # end fragments
+        end # end parts
+        s = a.join("_")
+
+        # Final tidying
+        s.gsub!(/[_]+/, "_") # replace continuous underscores with one underscore
+        s = s[1 .. -1] if s[0] == "_" # a pascalcase string will cause a leading underscore, which we need to remove
+        s
+    end
+
+    def snakecase_and_downcase
+        self.snakecase.downcase
     end
 
     def append(s)

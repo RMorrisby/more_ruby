@@ -26,7 +26,7 @@ Simply require the gem ( require "more_ruby" ) and the additional methods will b
 :format_with_thousands_delimiter
 
 ## String
-:append, :camelcase, :camelcase_to_snakecase, :capitalize_all, :capitalize_first_letter_only, :escape, :escape_whitespace, :extract_values_from_xml_string, :formatted_number, :index_of_last_capital, :invert_case, :is_hex?, :is_integer?, :join, :pascalcase, :prefix_lines, :random_case, :snakecase, :snakecase_and_downcase, :to_bool, :unindent
+:append, :camelcase, :capitalize_all, :capitalize_first_letter_only, :escape, :escape_whitespace, :extract_values_from_xml_string, :formatted_number, :index_of_last_capital, :invert_case, :is_hex?, :is_integer?, :join, :pascalcase, :prefix_lines, :random_case, :snakecase, :snakecase_and_downcase, :snakecase_non_alpha, :to_bool, :unindent
 
 ## Time
 :is_after?, :is_before?, :is_within?, :remove_subseconds

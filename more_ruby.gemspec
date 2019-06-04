@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'more_ruby'
-  s.version     = '0.2.0'
+  s.version     = '0.2.1'
   s.licenses    = ['MIT']
   s.summary     = "Adds some extra methods to some Ruby standard classes"
   s.authors     = ["Richard Morrisby"]

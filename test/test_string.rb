@@ -38,7 +38,7 @@ class TestString < Test::Unit::TestCase
 		assert_nil(re =~ e, ".escape yielded an escaped string that matched its Regexp object")
 	end
 
-	def test_snakecase
+	def test_snakecase_non_alpha
 		a = []
 		a << {:raw => "thiNGS", :expected => "thiNGS"}
 		a << {:raw => "thiNGS-with_stuff", :expected => "thiNGS_with_stuff"}
@@ -46,22 +46,33 @@ class TestString < Test::Unit::TestCase
 		a << {:raw => "th2i<>n!!!gs", :expected => "th2i_n_gs"}
 
 		a.each do |x|
-			actual = x[:raw].snakecase
-			assert_equal(actual, x[:expected], ".snakecase didn't work properly")
+			actual = x[:raw].snakecase_non_alpha
+			assert_equal(x[:expected], actual, ".snakecase_non_alpha didn't work properly")
 		end
 
 	end
 
-	def test_snakecase_and_downcase
+	def test_snakecase
 		a = []
-		a << {:raw => "thiNGS", :expected => "things"}
-		a << {:raw => "thiNGS-with_stuff", :expected => "things_with_stuff"}
+		a << {:raw => "things", :expected => "things"}
+		a << {:raw => "THINGS", :expected => "THINGS"} # should stay the same if all uppercase
+		a << {:raw => "REQ_ID", :expected => "REQ_ID"} # should stay the same if all uppercase
+		a << {:raw => "REQ_ID2", :expected => "REQ_ID2"}
+		a << {:raw => "REQID2", :expected => "reqid_2"}
+		a << {:raw => "req_ID", :expected => "req_ID"}
+		a << {:raw => "reqID", :expected => "req_id"}
+		a << {:raw => "reqId", :expected => "req_id"}
+		a << {:raw => "thi_ngs_yes", :expected => "thi_ngs_yes"}
+		a << {:raw => "thiNGSYes", :expected => "thi_ngs_yes"}
+		a << {:raw => "thiNGS", :expected => "thi_ngs"}
+		a << {:raw => "thiNGS-with_stuff", :expected => "thi_ngs_with_stuff"}
 		a << {:raw => "thi--_-ngs", :expected => "thi_ngs"}
 		a << {:raw => "th2i<>n!!!gs", :expected => "th2i_n_gs"}
+		a << {:raw => "THINGS1234STUFF5678", :expected => "things_1234_stuff_5678"}
 
 		a.each do |x|
-			actual = x[:raw].snakecase_and_downcase
-			assert_equal(actual, x[:expected], "snakecase_and_downcase didn't work properly")
+			actual = x[:raw].snakecase
+			assert_equal(x[:expected], actual, "snakecase didn't work properly")
 		end
 
 	end
@@ -95,7 +106,7 @@ class TestString < Test::Unit::TestCase
 
 		a.each do |x|
 			actual = x[:raw].camelcase
-			assert_equal( x[:expected], actual, ".camelcase didn't work properly")
+			assert_equal(x[:expected], actual, ".camelcase didn't work properly")
 		end
 
 	end
