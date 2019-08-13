@@ -45,4 +45,4 @@ Simply require the gem ( require "more_ruby" ) and the additional methods will b
 
 # New functionality #
 
-Adds :sup method to Object, allowing 'sup.<parent class method>' calls
+Adds :sup method to Object, allowing 'sup.[parent class method]' calls
