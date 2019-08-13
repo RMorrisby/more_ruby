@@ -41,3 +41,8 @@ Simply require the gem ( require "more_ruby" ) and the additional methods will b
 
 ## TrueClass
 :maybe?, :random
+
+
+# New functionality #
+
+Adds :sup method to Object, allowing 'sup.<parent class method>' calls
