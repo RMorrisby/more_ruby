@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'more_ruby'
-  s.version     = '0.2.2'
+  s.version     = '0.2.4'
   s.licenses    = ['MIT']
   s.summary     = "Adds some extra methods to some Ruby standard classes"
   s.authors     = ["Richard Morrisby"]
   s.email       = 'rmorrisby@gmail.com'
   s.files       = ["lib/more_ruby.rb"]
-  s.homepage    = 'https://rubygems.org/gems/more_ruby'
+  s.homepage    = 'https://github.com/RMorrisby/more_ruby'
   s.required_ruby_version = '>=1.9'
   s.files = Dir.glob("{bin,lib}/**/*") + %w(LICENCE.txt README.md)
   s.test_files = Dir["test/test*.rb"]
