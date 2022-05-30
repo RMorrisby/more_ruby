@@ -146,13 +146,11 @@ class TestArray < Test::Unit::TestCase
 
         b = (1 .. 4).to_a
         assert(b.all_kind_of?(Numeric), ".all_kind_of? returned false when the array's contents were all subclasses of the questioned class")
-        assert(b.all_kind_of?(Integer), ".all_kind_of? returned false when the array's contents were all subclasses of the questioned class")
-        assert(b.all_kind_of?(Fixnum), ".all_kind_of? returned false when the array's contents were all instances of the questioned class")
+        assert(b.all_kind_of?(Integer), ".all_kind_of? returned false when the array's contents were all instances of the questioned class")
 
         b.insert(2, 2.0)
         assert(b.all_kind_of?(Numeric), ".all_kind_of? returned false when the array's contents were all subclasses of the questioned class")
         assert_false(b.all_kind_of?(Integer), ".all_kind_of? returned true when there were distinctly different types in the array")
-        assert_false(b.all_kind_of?(Fixnum), ".all_kind_of? returned true when there were distinctly different types in the array")
     end
 
 
@@ -163,8 +161,7 @@ class TestArray < Test::Unit::TestCase
 
         b = (1 .. 4).to_a
         assert_false(b.all_instance_of?(Numeric), ".all_instance_of? returned true when the array's contents were all subclasses of the questioned class")
-        assert_false(b.all_instance_of?(Integer), ".all_instance_of? returned true when the array's contents were all subclasses of the questioned class")
-        assert(b.all_instance_of?(Fixnum), ".all_instance_of? returned false when the array's contents were all instances of the questioned class")
+        assert(b.all_instance_of?(Integer), ".all_instance_of? returned false when the array's contents were all instances of the questioned class")
 
         b.insert(2, 2.0)
         assert_false(b.all_instance_of?(Numeric), ".all_instance_of? returned true when the array's contents were all subclasses of the questioned class")        

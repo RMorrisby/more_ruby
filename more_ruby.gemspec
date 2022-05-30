@@ -1,13 +1,13 @@
 Gem::Specification.new do |s|
   s.name        = 'more_ruby'
-  s.version     = '0.2.4'
+  s.version     = '0.3.0'
   s.licenses    = ['MIT']
   s.summary     = "Adds some extra methods to some Ruby standard classes"
   s.authors     = ["Richard Morrisby"]
   s.email       = 'rmorrisby@gmail.com'
   s.files       = ["lib/more_ruby.rb"]
   s.homepage    = 'https://github.com/RMorrisby/more_ruby'
-  s.required_ruby_version = '>=1.9'
+  s.required_ruby_version = '>=2.4'
   s.files = Dir.glob("{bin,lib}/**/*") + %w(LICENCE.txt README.md)
   s.test_files = Dir["test/test*.rb"]
   s.description = <<-DESC
@@ -20,9 +20,6 @@ Gem::Specification.new do |s|
   ## Array
   :all_instance_of?, :all_kind_of?, :av, :delete_random, :include_any?, :insert_flat, :mean, :modulo_fetch, :peach, :random, :random_index, :random_insert, :random_move, :stringify_all_values_deep, :sum, :wrap_fetch
   
-  ## Fixnum
-  :digit_count, :format_with_thousands_delimiter, :num_to_letter, :signif
-  
   ## Float
   :format_with_thousands_delimiter, :signif
   
@@ -30,7 +27,7 @@ Gem::Specification.new do |s|
   :all_keys, :all_values, :delete_random, :peach, :random_key, :random_pair, :random_value, :remove_empty_fields, :sort_deep, :stringify_all_values_deep, :strip_hash_of_keys, :to_a_deep, :to_xml
   
   ## Integer
-  :digit_count, :format_with_thousands_delimiter, :signif
+  :digit_count, :format_with_thousands_delimiter, :num_to_letter, :signif
   
   ## NilClass
   :empty?
